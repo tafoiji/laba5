@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QDebug>>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -10,7 +11,6 @@ MainWindow::MainWindow(QWidget *parent)
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect  scr = screen->geometry();
     screenSize = QSize(scr.width() / 30 * 30, scr.height() / 30 * 30);
-
     QMenuBar *menuBar = new QMenuBar(this);
     QMenu *menu = new QMenu("Open..", this);
     QAction* opFile = new QAction("Open File", this);
@@ -31,6 +31,9 @@ MainWindow::MainWindow(QWidget *parent)
     QVBoxLayout* layout = new QVBoxLayout(this->centralWidget());
     layout->addWidget(koenBtn);
     layout->addWidget(convexBtn);
+
+    QString defautlFilePath = qApp->applicationDirPath() + "/segments.txt";
+    readTextFile(defautlFilePath);
 }
 
 MainWindow::~MainWindow()
